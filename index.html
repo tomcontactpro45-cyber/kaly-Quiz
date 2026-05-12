@@ -36,13 +36,17 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+
 .shell{max-width:640px;margin:0 auto;padding:2rem 1.25rem 4rem}
+
 .brand{text-align:center;margin-bottom:2.5rem;padding-top:1rem}
 .brand-name{font-family:'DM Serif Display',serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem}
 .brand-line{width:40px;height:1px;background:var(--pink);margin:0 auto}
+
 .page{display:none}
 .page.active{display:block;animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
 .step-nav{display:flex;align-items:center;gap:0;margin-bottom:2rem}
 .step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--hint);transition:color .2s}
 .step.active{color:var(--pink)}
@@ -52,24 +56,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .step.done .step-dot{background:var(--teal);border-color:var(--teal);color:#fff}
 .step-line{flex:1;height:1px;background:var(--border);margin:0 10px}
 .step.done+.step-line{background:var(--teal)}
+
 .page-header{margin-bottom:2rem}
 .page-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);margin-bottom:.4rem;line-height:1.2}
 .page-sub{font-size:14px;color:var(--muted);line-height:1.6}
 .page-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:.875rem}
 .meta-tag{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
 .meta-tag svg{opacity:.5}
+
 .section-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin:2rem 0 1rem;display:flex;align-items:center;gap:8px}
 .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--pink-l),transparent)}
+
 .field{margin-bottom:1.25rem}
 .label{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.375rem;display:block}
 .sub-label{font-size:12px;color:var(--hint);margin-bottom:.5rem;display:block}
 textarea,input[type=text]{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;outline:none;resize:vertical;transition:border-color .2s,box-shadow .2s;line-height:1.6}
 textarea:focus,input[type=text]:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(212,83,126,.1)}
 textarea{min-height:80px}
+
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:.25rem}
 .pill{font-size:13px;padding:7px 16px;border-radius:99px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:400;font-family:'DM Sans',sans-serif}
 .pill:hover{border-color:var(--pink);color:var(--pink)}
 .pill.sel{background:var(--pink-l);border-color:var(--pink);color:var(--pink-d);font-weight:500}
+
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:.25rem}
 .card-opt{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all .18s;text-align:left;font-family:'DM Sans',sans-serif}
 .card-opt:hover{border-color:var(--pink);transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,83,126,.1)}
@@ -78,23 +87,29 @@ textarea{min-height:80px}
 .card-icon{font-size:20px;margin-bottom:8px;color:var(--hint)}
 .card-title-t{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
 .card-sub-t{font-size:11px;color:var(--hint);line-height:1.4}
+
 .range-wrap{margin-top:.25rem}
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--hint);margin-bottom:6px}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:99px;background:linear-gradient(to right,var(--pink) 0%,var(--pink) var(--pct,33%),#E0E0D8 var(--pct,33%),#E0E0D8 100%);outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--pink);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 .range-val{text-align:center;font-size:15px;font-weight:500;color:var(--pink);margin-top:6px}
+
 .divider{height:1px;background:var(--border);margin:2rem 0}
+
 .btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border)}
 .btn-back{font-size:13px;padding:9px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
 .btn-back:hover{border-color:var(--gray);color:var(--text)}
 .btn-next{font-size:14px;padding:11px 28px;border-radius:var(--radius-sm);border:none;background:var(--pink);color:#fff;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px;transition:all .15s;letter-spacing:.01em}
 .btn-next:hover{background:var(--pink-d);transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,83,126,.25)}
 .btn-next:active{transform:translateY(0)}
+
 .progress-bar-wrap{height:3px;background:var(--border);border-radius:99px;margin-bottom:1.75rem;overflow:hidden}
 .progress-bar{height:3px;background:var(--pink);border-radius:99px;transition:width .35s ease}
+
 .q-num{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem}
 .q-text{font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);margin-bottom:1.25rem;line-height:1.35}
 .q-context{font-size:13px;color:var(--muted);background:var(--gray-l);border-left:3px solid var(--pink);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:1.25rem;font-style:italic}
+
 .q-opts{display:flex;flex-direction:column;gap:9px;margin-bottom:1.25rem}
 .qopt{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .18s;display:flex;align-items:center;gap:12px;font-family:'DM Sans',sans-serif;line-height:1.4}
 .qopt:hover{border-color:var(--pink);background:var(--pink-l)}
@@ -106,15 +121,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .qopt.sel:not(.correct):not(.wrong) .opt-ltr{background:var(--pink);color:#fff}
 .qopt.correct .opt-ltr,.qopt.show-correct .opt-ltr{background:var(--teal);color:#fff}
 .qopt.wrong .opt-ltr{background:var(--red);color:#fff}
+
 .feedback{border-radius:var(--radius-sm);padding:11px 15px;font-size:13px;line-height:1.6;margin-bottom:1.25rem;display:none}
 .feedback.show{display:block;animation:fadeIn .2s ease}
 .feedback.ok{background:var(--teal-l);border:1px solid rgba(15,110,86,.2);color:var(--teal)}
 .feedback.ko{background:var(--red-l);border:1px solid rgba(163,45,45,.2);color:var(--red)}
+
 .q-nav{display:flex;justify-content:space-between;align-items:center}
 .q-counter{font-size:13px;color:var(--hint)}
 .btn-qnext{font-size:13px;padding:9px 22px;border-radius:var(--radius-sm);border:none;background:var(--pink);color:#fff;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
 .btn-qnext:hover:not(:disabled){background:var(--pink-d)}
 .btn-qnext:disabled{opacity:.3;cursor:not-allowed}
+
 .results{text-align:center;padding:1rem 0}
 .score-ring{width:120px;height:120px;margin:0 auto 1.5rem;position:relative}
 .score-ring svg{transform:rotate(-90deg)}
@@ -132,12 +150,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .action-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:1.5rem}
 .btn-action{font-size:13px;padding:10px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--pink);background:transparent;color:var(--pink);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:7px;transition:all .15s;font-weight:500}
 .btn-action:hover{background:var(--pink-l)}
+.btn-action.solid{background:var(--pink);color:#fff;border-color:var(--pink)}
+.btn-action.solid:hover{background:var(--pink-d)}
+
+.success-screen{text-align:center;padding:3rem 1rem}
+.success-icon{font-size:56px;margin-bottom:1.5rem}
+.success-title{font-family:'DM Serif Display',serif;font-size:30px;margin-bottom:.75rem}
+.success-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:380px;margin:0 auto 2rem}
 .result-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-top:2rem;text-align:left}
 .result-card h3{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--hint);margin-bottom:1rem}
 .result-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
 .result-row:last-child{border-bottom:none}
 .result-key{color:var(--muted);font-weight:400}
 .result-val{color:var(--text);font-weight:500;text-align:right;max-width:55%;word-break:break-word}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px}
+.badge-pass{background:var(--teal-l);color:var(--teal)}
+.badge-mid{background:var(--amber-l);color:var(--amber)}
+.badge-fail{background:var(--red-l);color:var(--red)}
 </style>
 </head>
 <body>
@@ -156,7 +185,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="step" id="s3"><div class="step-dot">3</div><span>Results</span></div>
   </div>
 
-  <!-- PAGE 1 — APPLICATION -->
+  <!-- ══════════════════════════════════
+       PAGE 1 — CANDIDATURE
+  ════════════════════════════════════ -->
   <div class="page active" id="page1">
     <div class="page-header">
       <h1 class="page-title">Chatter application</h1>
@@ -176,7 +207,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </div>
     <div class="field">
       <label class="label">Your Telegram and Discord</label>
-      <textarea id="f_contacts" placeholder="Telegram: @username&#10;Discord: username#0000" rows="3"></textarea>
+      <textarea id="f_contacts" placeholder="Telegram : @username&#10;Discord : username#0000" rows="3"></textarea>
     </div>
 
     <div class="section-title">Chatting experience</div>
@@ -184,61 +215,61 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="field">
       <label class="label">Do you have any OFM chatting experience?</label>
       <div class="cards" id="f_experience">
-        <button class="card-opt" data-val="Beginner — no experience" onclick="toggleCard(this,true)">
+        <button class="card-opt" data-val="Débutant — aucune expérience" onclick="toggleCard(this,true)">
           <div class="card-icon">👤</div>
-          <div class="card-title-t">Beginner</div>
+          <div class="card-title-t">Débutant</div>
           <div class="card-sub-t">Never chatted on OF</div>
         </button>
-        <button class="card-opt" data-val="Less than 3 months" onclick="toggleCard(this,true)">
+        <button class="card-opt" data-val="Moins de 3 mois" onclick="toggleCard(this,true)">
           <div class="card-icon">⚡</div>
-          <div class="card-title-t">Under 3 months</div>
+          <div class="card-title-t">Moins de 3 mois</div>
           <div class="card-sub-t">Some experience</div>
         </button>
-        <button class="card-opt" data-val="3 to 12 months" onclick="toggleCard(this,true)">
+        <button class="card-opt" data-val="3 à 12 mois" onclick="toggleCard(this,true)">
           <div class="card-icon">📈</div>
-          <div class="card-title-t">3 to 12 months</div>
+          <div class="card-title-t">3 à 12 mois</div>
           <div class="card-sub-t">Solid experience</div>
         </button>
-        <button class="card-opt" data-val="More than a year" onclick="toggleCard(this,true)">
+        <button class="card-opt" data-val="Plus d'un an" onclick="toggleCard(this,true)">
           <div class="card-icon">⭐</div>
-          <div class="card-title-t">1 year+</div>
+          <div class="card-title-t">Plus d'un an</div>
           <div class="card-sub-t">Senior profile</div>
         </button>
       </div>
     </div>
     <div class="field">
       <label class="label">Briefly describe your experience</label>
-      <span class="sub-label">Account type (free/paid), how many accounts, what you actually did. If beginner, write "no experience".</span>
-      <textarea id="f_detail_exp" placeholder="Ex: 4 months on 2 free accounts, handling DMs and PPV follow-ups..." rows="3"></textarea>
+      <span class="sub-label">Type de compte (free/paid), combien de comptes, ce que tu faisais. Si débutant, écris "aucune expérience".</span>
+      <textarea id="f_detail_exp" placeholder="Ex : 4 mois sur 2 comptes free, gestion DMs et relances PPV..." rows="3"></textarea>
     </div>
 
-    <div class="section-title">Motivation & commitment</div>
+    <div class="section-title">Motivation & projection</div>
 
     <div class="field">
       <label class="label">Why do you want to do OFM chatting?</label>
       <span class="sub-label">Be honest — there is no wrong answer.</span>
-      <textarea id="f_motivation" placeholder="What draws you to this, why now..." rows="3"></textarea>
+      <textarea id="f_motivation" placeholder="Ce qui t'attire, pourquoi maintenant..." rows="3"></textarea>
     </div>
     <div class="field">
-      <label class="label">How long do you see yourself in this role?</label>
+      <label class="label">Tu te projettes sur quelle durée ?</label>
       <div class="pills" id="f_duree">
-        <button class="pill" data-val="1 to 3 months" onclick="togglePill(this,true)">1–3 months</button>
-        <button class="pill" data-val="3 to 6 months" onclick="togglePill(this,true)">3–6 months</button>
-        <button class="pill" data-val="6 months to 1 year" onclick="togglePill(this,true)">6 mo–1 year</button>
-        <button class="pill" data-val="Long term — 1 year and more" onclick="togglePill(this,true)">Long term</button>
+        <button class="pill" data-val="1 à 3 mois" onclick="togglePill(this,true)">1–3 months</button>
+        <button class="pill" data-val="3 à 6 mois" onclick="togglePill(this,true)">3–6 months</button>
+        <button class="pill" data-val="6 mois à 1 an" onclick="togglePill(this,true)">6 mo–1 year</button>
+        <button class="pill" data-val="Long term — 1 an et plus" onclick="togglePill(this,true)">Long term</button>
       </div>
     </div>
 
-    <div class="section-title">Situation & availability</div>
+    <div class="section-title">Situation & disponibilités</div>
 
     <div class="field">
       <label class="label">What is your current situation?</label>
       <div class="pills" id="f_situation">
         <button class="pill" data-val="Student" onclick="togglePill(this,false)">Student</button>
-        <button class="pill" data-val="Employed on the side" onclick="togglePill(this,false)">Employed</button>
-        <button class="pill" data-val="Unemployed — fully available" onclick="togglePill(this,false)">Unemployed</button>
+        <button class="pill" data-val="Employed" onclick="togglePill(this,false)">En emploi</button>
+        <button class="pill" data-val="Unemployed — fully available" onclick="togglePill(this,false)">Sans emploi</button>
         <button class="pill" data-val="Freelance" onclick="togglePill(this,false)">Freelance</button>
-        <button class="pill" data-val="Other" onclick="togglePill(this,false)">Other</button>
+        <button class="pill" data-val="Autre" onclick="togglePill(this,false)">Autre</button>
       </div>
     </div>
     <div class="field">
@@ -246,70 +277,70 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <div class="range-wrap">
         <div class="range-labels"><span>1h</span><span>4h</span><span>8h</span><span>12h+</span></div>
         <input type="range" id="f_heures" min="1" max="12" step="1" value="4"
-          oninput="document.getElementById('hval').textContent=this.value+'h / day';this.style.setProperty('--pct',((this.value-1)/11*100)+'%')">
+          oninput="document.getElementById('hval').textContent=this.value+'h / jour';this.style.setProperty('--pct',((this.value-1)/11*100)+'%')">
         <div class="range-val" id="hval">4h / day</div>
       </div>
     </div>
     <div class="field">
-      <label class="label">Which time slots are you available?</label>
+      <label class="label">Sur quelles plages horaires ?</label>
       <div class="pills" id="f_horaires">
-        <button class="pill" data-val="Morning (6am–12pm)" onclick="togglePill(this,false)">Morning</button>
-        <button class="pill" data-val="Afternoon (12pm–6pm)" onclick="togglePill(this,false)">Afternoon</button>
-        <button class="pill" data-val="Evening (6pm–11pm)" onclick="togglePill(this,false)">Evening</button>
-        <button class="pill" data-val="Night (11pm–6am)" onclick="togglePill(this,false)">Night</button>
+        <button class="pill" data-val="Morning (6h–12h)" onclick="togglePill(this,false)">Morning</button>
+        <button class="pill" data-val="Afternoon (12h–18h)" onclick="togglePill(this,false)">Afternoon</button>
+        <button class="pill" data-val="Evening (18h–23h)" onclick="togglePill(this,false)">Evening</button>
+        <button class="pill" data-val="Night (23h–6h)" onclick="togglePill(this,false)">Night</button>
       </div>
     </div>
     <div class="field">
       <label class="label">Available on weekends?</label>
       <div class="pills" id="f_weekend">
-        <button class="pill" data-val="Yes — fully available" onclick="togglePill(this,true)">Yes, fully</button>
+        <button class="pill" data-val="Oui — pleinement" onclick="togglePill(this,true)">Yes, fully</button>
         <button class="pill" data-val="Partially" onclick="togglePill(this,true)">Partially</button>
-        <button class="pill" data-val="No" onclick="togglePill(this,true)">No</button>
+        <button class="pill" data-val="Non" onclick="togglePill(this,true)">Non</button>
       </div>
     </div>
 
     <div class="section-title">Chatting profile</div>
 
     <div class="field">
-      <label class="label">What are you most comfortable with?</label>
+      <label class="label">Tu te considères plutôt à l'aise avec quoi ?</label>
       <div class="cards" id="f_points_forts">
-        <button class="card-opt" data-val="Relationship & GFE" onclick="toggleCard(this,false)">
+        <button class="card-opt" data-val="Relation & GFE" onclick="toggleCard(this,false)">
           <div class="card-icon">🤍</div>
-          <div class="card-title-t">Relationship & GFE</div>
+          <div class="card-title-t">Relation & GFE</div>
           <div class="card-sub-t">Building connections, retention</div>
         </button>
-        <button class="card-opt" data-val="Sales & PPV" onclick="toggleCard(this,false)">
+        <button class="card-opt" data-val="Vente & PPV" onclick="toggleCard(this,false)">
           <div class="card-icon">💸</div>
-          <div class="card-title-t">Sales & PPV</div>
+          <div class="card-title-t">Vente & PPV</div>
           <div class="card-sub-t">Converting, pitching</div>
         </button>
-        <button class="card-opt" data-val="Persona embodiment" onclick="toggleCard(this,false)">
+        <button class="card-opt" data-val="Incarnation de persona" onclick="toggleCard(this,false)">
           <div class="card-icon">🎭</div>
           <div class="card-title-t">Persona</div>
           <div class="card-sub-t">Playing a role, staying consistent</div>
         </button>
-        <button class="card-opt" data-val="Organization & CRM" onclick="toggleCard(this,false)">
+        <button class="card-opt" data-val="Organisation & CRM" onclick="toggleCard(this,false)">
           <div class="card-icon">📋</div>
-          <div class="card-title-t">Organization</div>
+          <div class="card-title-t">Organisation</div>
           <div class="card-sub-t">Documenting, tracking</div>
         </button>
       </div>
     </div>
     <div class="field">
       <label class="label">What is your biggest weakness in chatting, honestly?</label>
-      <textarea id="f_faiblesse" placeholder="Ex: I get impatient with slow subscribers, I struggle staying in persona for long..." rows="3"></textarea>
+      <textarea id="f_faiblesse" placeholder="Ex : je m'impatiente avec les abonnés peu réactifs..." rows="3"></textarea>
     </div>
     <div class="field">
       <label class="label">A subscriber becomes aggressive and disrespectful. How do you react?</label>
       <textarea id="f_agressivite" placeholder="Describe how you handle this situation concretely..." rows="3"></textarea>
     </div>
     <div class="field">
-      <label class="label">Are you comfortable embodying a female persona?</label>
+      <label class="label">Tu es à l'aise pour incarner un persona féminin ?</label>
       <div class="pills" id="f_persona_fem">
-        <button class="pill" data-val="Yes — no problem" onclick="togglePill(this,true)">Yes, no problem</button>
-        <button class="pill" data-val="Pretty much — with practice" onclick="togglePill(this,true)">Pretty much</button>
-        <button class="pill" data-val="Not yet — need guidance" onclick="togglePill(this,true)">Not yet</button>
-        <button class="pill" data-val="No" onclick="togglePill(this,true)">No</button>
+        <button class="pill" data-val="Yes — no problem" onclick="togglePill(this,true)">Oui, aucun prob.</button>
+        <button class="pill" data-val="Plutôt oui — avec pratique" onclick="togglePill(this,true)">Plutôt oui</button>
+        <button class="pill" data-val="Pas encore — besoin d'être guidé(e)" onclick="togglePill(this,true)">Pas encore</button>
+        <button class="pill" data-val="Non" onclick="togglePill(this,true)">Non</button>
       </div>
     </div>
     <div class="field">
@@ -323,15 +354,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </div>
   </div>
 
-  <!-- PAGE 2 — QUIZ -->
+  <!-- ══════════════════════════════════
+       PAGE 2 — QUIZ
+  ════════════════════════════════════ -->
   <div class="page" id="page2">
     <div class="page-header">
-      <h1 class="page-title">Kaly Persona Quiz</h1>
+      <h1 class="page-title">Quiz Kaly Persona Quiz</h1>
       <p class="page-sub">Prove that you have read and understood the persona sheet before chatting.</p>
       <div class="page-meta">
         <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg> 12 questions</span>
         <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5–8 min</span>
-        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Passing score: 9/12</span>
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Seuil de passage : 9/12</span>
       </div>
     </div>
 
@@ -341,13 +374,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="btn-row">
       <button class="btn-back" onclick="goForm()">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
+        Retour
       </button>
       <span></span>
     </div>
   </div>
 
-  <!-- PAGE 3 — RESULTS -->
+  <!-- ══════════════════════════════════
+       PAGE 3 — RÉSULTATS
+  ════════════════════════════════════ -->
   <div class="page" id="page3">
     <div id="results-inner"></div>
   </div>
@@ -357,32 +392,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <script>
 const QA=['b','c','b','c','c','b','b','c','c','c','b','c'];
 const QQ=[
-  {cat:'Identity',txt:'What is the mantra every chatter must keep in mind before each session?',ctx:null,opts:['I am a professional chatter representing Kaly.','You are not a chatter. You are Kaly.','My role is to maximize sales for the agency.','I must stay professional and keep an emotional distance.']},
-  {cat:'Backstory',txt:'Why did Kaly launch her OnlyFans?',ctx:null,opts:['Only out of curiosity and personal challenge.','Only to make money.','Personal challenge + real financial need — both, without shame.','To fund her studies — money is taboo for her.']},
-  {cat:'Trust',txt:'A subscriber asks for Kaly\'s name on day 1. What does she do?',ctx:null,opts:['She refuses — personal information is off limits.','She gives her name spontaneously — it\'s Kaly, available from day 1.','She waits until day 7 before sharing her name.','She says "I can\'t tell you that" to keep the mystery.']},
-  {cat:'Trust system',txt:'When can Kaly slip in the secret that her parents know nothing?',ctx:null,opts:['From day 1 — a good way to create complicity.','Never — too sensitive.','Day 10–14 — when real trust is established, with humor.','Only if the subscriber asks directly before day 10.']},
-  {cat:'Tone & language',txt:'A subscriber compliments Kaly on her appearance. Which response fits best?',ctx:'Message received: "you\'re so gorgeous honestly"',opts:['"aww thanks bb 😘 glad you think so!"','"Thank you so much, that really means something."','"STOP 😭 okay why would you say that... I\'m literally turning red rn. I never know what to do with compliments I just short circuit lol. but thank you... genuinely ☺️"','"lol okay 🔥 wanna see more?"']},
-  {cat:'PPV pitch',txt:'It\'s day 1, the conversation is going well. How does Kaly introduce a PPV?',ctx:null,opts:['"check out my new content! $15 only 🔥"','"okay so... I filmed something and I\'ve been going back and forth on whether to even send it 😅 it\'s a little more than usual for me. it\'s $[price] if you\'re curious — no pressure fr"','"I have exclusive content available, want the link?"','She never sends a PPV on day 1 — wait at least until day 7.']},
-  {cat:'Emojis',txt:'Which emoji combination matches Kaly\'s style?',ctx:null,opts:['🔥 💋 💦 😈','😭 😳 🙈 😅 ☺️ 🎮 💀','❤️ 😍 🥰 💕 😘','💪 😎 👑 ✨ 🤑']},
-  {cat:'Gaming & CRM',txt:'A subscriber mentions he plays Valorant. What do you do immediately?',ctx:null,opts:['Ignore it — video games are not relevant to sales.','Change the subject to something more commercial.','Log "Valorant" in the CRM immediately, ask his rank, engage on that topic.','Wait until day 7 to bring up video games.']},
-  {cat:'Red flag',txt:'A subscriber says "you seem different today, that doesn\'t sound like you." What is the right reaction?',ctx:null,opts:['Keep going normally — he\'s probably just in a bad mood.','Apologize and try to recover the situation alone.','STOP — persona break detected. Escalate to the agency immediately.','Send a PPV to distract the subscriber and change the subject.']},
-  {cat:'Deflection',txt:'A subscriber asks for Kaly\'s exact city. How does she respond?',ctx:null,opts:['"I can\'t answer that question."','She gives a fake city to satisfy the subscriber.','lmao I\'m not giving you my full address on day 1 😭 give me some credit — deflects with humor.','She answers honestly — transparency is the priority.']},
-  {cat:'Evolution',txt:'When can Kaly start initiating conversations and proposing customs?',ctx:null,opts:['From day 1 — the earlier you sell, the better.','Day 15–25 — when trust is established and she dares more.','Only after 3 months of relationship.','Never — it\'s always the subscriber who should initiate.']},
-  {cat:'Final test',txt:'Before sending a message, what is the only test that really matters?',ctx:null,opts:['"Will this message generate a sale?"','"Is this a good chatter message?"','"Would Kaly actually say this?"','"Does this message follow agency rules?"']},
+  {cat:'Identité',txt:'What is the mantra every chatter must keep in mind before each session?',ctx:null,opts:['I am a professional chatter representing Kaly.','Tu n\'es pas chatteur. Tu es Kaly.','Mon rôle est de maximiser les ventes pour l\'agence.','I must stay professional and keep an emotional distance.']},
+  {cat:'Backstory',txt:'Why did Kaly launch her OnlyFans?',ctx:null,opts:['Only out of curiosity and personal challenge.','Uniquement pour gagner de l\'argent.','Défi personnel + besoin d\'argent réel — les deux, sans honte.','Pour financer ses études — l\'argent est tabou pour elle.']},
+  {cat:'Confiance',txt:'A subscriber asks for Kaly's name on day 1. What does she do?',ctx:null,opts:['She refuses — personal information is off limits.','Elle donne son prénom spontanément — c\'est Kaly, disponible dès J1.','She waits until day 7 before sharing her name.','She says "I can't tell you that" to keep the mystery.']},
+  {cat:'Trust system',txt:'When can Kaly slip in the secret that her parents know nothing?',ctx:null,opts:['From day 1 — a good way to create complicity.','Never — too sensitive.','Day 10–14 — when real trust is established, with humor.','Seulement si l\'abonné pose directement la question avant J10.']},
+  {cat:'Ton & langage',txt:'Un abonné complimente Kaly sur son apparence. Quelle réponse est la plus cohérente ?',ctx:'Message reçu : "you\'re so gorgeous honestly"',opts:['"aww thanks bb 😘 glad you think so!"','"Thank you so much, that really means something."','"STOP 😭 okay why would you say that... I\'m literally turning red rn. I never know what to do with compliments I just short circuit lol. but thank you... genuinely ☺️"','"lol okay 🔥 wanna see more?"']},
+  {cat:'Pitch PPV',txt:'C\'est le jour 1, la conversation se passe bien. Comment Kaly introduit un PPV ?',ctx:null,opts:['"check out my new content! $15 only 🔥"','"okay so... I filmed something and I\'ve been going back and forth on whether to even send it 😅 it\'s a little more than usual for me. it\'s $[prix] if you\'re curious — no pressure fr"','"J\'ai du contenu exclusif disponible, tu veux le lien ?"','Elle n\'envoie jamais de PPV au jour 1 — attendre le jour 7 minimum.']},
+  {cat:'Emojis',txt:'Quelle combinaison d\'emojis correspond au registre de Kaly ?',ctx:null,opts:['🔥 💋 💦 😈','😭 😳 🙈 😅 ☺️ 🎮 💀','❤️ 😍 🥰 💕 😘','💪 😎 👑 ✨ 🤑']},
+  {cat:'Gaming & CRM',txt:'Un abonné mentionne qu\'il joue à Valorant. Que dois-tu faire immédiatement ?',ctx:null,opts:['Ignore it — video games are not relevant to sales.','Change the subject to something more commercial.','Log "Valorant" in the CRM immediately, ask his rank, engage on that topic.','Wait until day 7 to bring up video games.']},
+  {cat:'Signal d\'alarme',txt:'Un abonné dit "you seem different today, that doesn\'t sound like you." Quelle est la bonne réaction ?',ctx:null,opts:['Keep going normally — he's probably just in a bad mood.','S\'excuser et essayer de rattraper seul la situation.','STOP — rupture de persona détectée. Escalader à l\'agence immédiatement.','Envoyer un PPV pour distraire l\'abonné et changer de sujet.']},
+  {cat:'Refus',txt:'A subscriber asks for Kaly's exact city. How does she respond?',ctx:null,opts:['"I can't answer that question."','Elle donne une fausse ville pour satisfaire l\'abonné.','lmao I\'m not giving you my full address on day 1 😭 give me some credit — elle déflecte avec humour.','She answers honestly — transparency is the priority.']},
+  {cat:'Évolution',txt:'When can Kaly start initiating conversations and proposing customs?',ctx:null,opts:['Dès le jour 1 — plus tôt on vend, mieux c\'est.','Jour 15–25 — quand la confiance est installée et qu\'elle "ose" davantage.','Only after 3 months of relationship.','Jamais — c\'est toujours l\'abonné qui doit initier.']},
+  {cat:'Test final',txt:'Avant d\'envoyer un message, quel est le seul test qui compte vraiment ?',ctx:null,opts:['"Will this message generate a sale?"','"Est-ce que c\'est un bon message de chatteur ?"','"Would Kaly actually say this?"','"Est-ce que ce message respecte les règles de l\'agence ?"']},
 ];
 const QFB=[
-  {ok:'Exactly. You are not an operator — you ARE Kaly. Every answer comes from her.',ko:'Wrong. The mantra is: "You are not a chatter. You are Kaly." No distance — you fully embody the persona.'},
-  {ok:'Correct. Two honest reasons, both owned. Money is pragmatic, not taboo.',ko:'Incomplete. Dual motivation: personal challenge AND real financial need. Money is never taboo for Kaly.'},
-  {ok:'Yes. Kaly is not suspicious, she is shy. Her name is given spontaneously from day 1.',ko:'Wrong. Name = day 1, spontaneously. Being shy does not mean hiding.'},
-  {ok:'Perfect. The parents\' secret is an intimate confidence for day 10–14, slipped in with humor.',ko:'Incorrect. This secret unlocks between day 10 and 14 — not from day 1, not never.'},
-  {ok:'Perfect. Sincere surprise, Gen Z awkwardness, authentic thanks. That is Kaly.',ko:'Wrong register. Kaly reacts with genuine awkwardness — "short circuit", real thanks. Not smooth.'},
-  {ok:'That\'s it. Hesitation, minimization, zero pressure. Kaly shares — she does not sell.',ko:'Wrong. Dry PPV pitch = persona break. Kaly always hesitates, always lets the subscriber feel free.'},
-  {ok:'Exactly. Her emojis reflect her shyness and Gen Z humor — never too confident.',ko:'Not her emojis. Kaly\'s palette: 😭 😳 🙈 😅 ☺️ 🎮 💀 — never 🔥 💋 💦 😈.'},
-  {ok:'Jackpot understood. Immediate CRM + gaming engagement = loyal subscriber almost guaranteed.',ko:'Wrong. Gamer subscriber = jackpot. Game logged in CRM immediately, direct engagement.'},
-  {ok:'Correct. Critical red flag — stop and escalate, never try to recover alone.',ko:'Wrong. "You seem different" = persona break. STOP + immediate agency escalation.'},
-  {ok:'Perfect. Kaly deflects with humor, never bluntly, never gives her real city.',ko:'Incorrect. No blunt refusal, no real city. Always a humorous deflection.'},
-  {ok:'Yes. Day 15–25 is the natural window where she dares — visible and credible.',ko:'Wrong. Kaly\'s initiative emerges at day 15–25 — not before, not after 3 months.'},
-  {ok:'That IS the test. Just: is it HER? Not the sales, not the rules.',ko:'Wrong. The only test: "Would Kaly actually say this?" Everything else follows from that.'},
+  {ok:'Exactement. Tu n\'es pas un opérateur — tu ES Kaly. Chaque réponse vient d\'elle.',ko:'Non. Le mantra est : "Tu n\'es pas chatteur. Tu es Kaly." Pas de distance — tu incarnes complètement.'},
+  {ok:'Correct. Deux raisons honnêtes et assumées. L\'argent est pragmatique, pas tabou.',ko:'Incomplet. Motivation double : défi personnel ET argent réel. L\'argent n\'est jamais tabou pour Kaly.'},
+  {ok:'Oui. Kaly n\'est pas méfiante, elle est timide. Son prénom se donne spontanément dès J1.',ko:'Faux. Prénom = J1, spontanément. La timidité ne signifie pas se cacher.'},
+  {ok:'Parfait. Le secret des parents est une confidence intime pour J10–14, glissée avec humour.',ko:'Incorrect. Ce secret se débloque entre J10 et J14 — ni dès J1, ni jamais.'},
+  {ok:'Parfait. Surprise sincère, maladresse Gen Z, remerciement authentique. C\'est Kaly.',ko:'Mauvais registre. Kaly réagit avec maladresse sincère — "short circuit", merci vrai. Pas lisse.'},
+  {ok:'C\'est ça. Hésitation, minimisation, zéro pression. Kaly partage — elle ne vend pas.',ko:'Non. Pitch PPV sec = rupture de persona. Kaly hésite toujours, laisse libre l\'abonné.'},
+  {ok:'Exactement. Ses emojis reflètent sa timidité et son humour Gen Z — jamais trop assumés.',ko:'Ce ne sont pas ses emojis. La palette Kaly : 😭 😳 🙈 😅 ☺️ 🎮 💀 — jamais 🔥 💋 💦 😈.'},
+  {ok:'Jackpot bien compris. CRM immédiat + engagement gaming = abonné fidèle quasi garanti.',ko:'Faux. Abonné gamer = jackpot. Jeu noté CRM immédiatement, engagement direct.'},
+  {ok:'Correct. Signal d\'alarme critique — stop et escalade, jamais rattraper seul.',ko:'Non. "You seem different" = rupture de persona. STOP + escalade agence immédiatement.'},
+  {ok:'Parfait. Kaly déflecte avec humour, jamais sèchement, jamais sa vraie ville.',ko:'Incorrect. Ni refus sec, ni vraie ville. Déflection humoristique toujours.'},
+  {ok:'Oui. J15–25 c\'est la fenêtre naturelle où elle ose — visible et crédible.',ko:'Non. L\'initiative de Kaly émerge à J15–25 — pas avant, pas après 3 mois.'},
+  {ok:'C\'est LE test. Juste : est-ce que c\'est ELLE ? Pas les ventes, pas les règles.',ko:'Non. L\'unique test : "Would Kaly actually say this?" Tout le reste découle de ça.'},
 ];
 const CATS=[[0,1],[2,3],[4,5,6],[7],[8,9,10,11]];
 
@@ -427,7 +462,8 @@ function buildQuiz(){
     div.dataset.qi=i;
     div.style.display=i===0?'block':'none';
     const letters=['a','b','c','d'];
-    const optsHtml=q.opts.map((o,oi)=>`<button class="qopt" data-v="${letters[oi]}" onclick="qpick(this,${i})"><span class="opt-ltr">${letters[oi].toUpperCase()}</span>${o}</button>`).join('');
+    const optsHtml=q.opts.map((o,oi)=>`<button class="qopt" data-v="${letters[oi]}" onclick="qpick(this,${i})">`+
+      `<span class="opt-ltr">${letters[oi].toUpperCase()}</span>${o}</button>`).join('');
     div.innerHTML=`<div class="q-num">Question ${i+1} / 12 · ${q.cat}</div>`+
       `<p class="q-text">${q.txt}</p>`+
       (q.ctx?`<div class="q-context">${q.ctx}</div>`:'')+
@@ -466,7 +502,9 @@ function qpick(btn,i){
 }
 
 function qnext(i){
-  document.querySelectorAll('.q-block').forEach((b,bi)=>{b.style.display=bi===i+1?'block':'none';});
+  document.querySelectorAll('.q-block').forEach((b,bi)=>{
+    b.style.display=bi===i+1?'block':'none';
+  });
   qCur=i+1;
   window.scrollTo(0,0);
 }
@@ -494,9 +532,10 @@ function showResults(){
   setStep(3);
   const lvl=qScore>=9?'pass':qScore>=7?'mid':'fail';
   const color=lvl==='pass'?'var(--teal)':lvl==='mid'?'var(--amber)':'var(--red)';
-  const title=lvl==='pass'?'Quiz passed — welcome!':lvl==='mid'?'Almost — a few points to review':'Not ready yet — re-read the Kaly sheet';
-  const sub=lvl==='pass'?'You know Kaly. You can move on to onboarding.':lvl==='mid'?'Re-read the sections in red and try again. Passing score: 9/12.':'Re-read the full persona sheet before trying again.';
-  const btext=lvl==='pass'?'Passed ✓':lvl==='mid'?'To review':'Insufficient';
+  const title=lvl==='pass'?'Quiz validé — bienvenue !':lvl==='mid'?'Presque — quelques points à revoir':'À retravailler — relis la fiche';
+  const sub=lvl==='pass'?'Tu connais Kaly. Tu peux passer à l\'onboarding.':lvl==='mid'?'Relis les sections en rouge et tente à nouveau. Passing score: 9/12.':'Relis intégralement la fiche persona avant de recommencer.';
+  const badge=lvl==='pass'?'badge-pass':lvl==='mid'?'badge-mid':'badge-fail';
+  const btext=lvl==='pass'?'Validé ✓':lvl==='mid'?'À revoir':'Insuffisant';
   const pct=Math.round(qScore/12*100);
   const r=48;const circ=2*Math.PI*r;const offset=circ*(1-pct/100);
   const catNames=['Identity & backstory','Trust system','Tone & scripts','Gaming & CRM','Operational rules'];
@@ -540,7 +579,7 @@ function showResults(){
       <p class="res-sub">${sub}</p>
       <div class="bars">${barsHtml}</div>
       <div class="action-row">
-        ${lvl!=='pass'?`<button class="btn-action" onclick="retryQuiz()">↺ Retry quiz</button>`:''}
+        ${lvl!=='pass'?`<button class="btn-action" onclick="retryQuiz()">↺ Refaire le quiz</button>`:''}
       </div>
     </div>
     <div class="result-card">
@@ -548,8 +587,13 @@ function showResults(){
       ${rowsHtml}
     </div>
     <div style="margin-top:2rem;padding:1.5rem;background:var(--gray-l);border-radius:var(--radius);font-size:13px;color:var(--muted);line-height:1.7">
-      <strong style="color:var(--text);display:block;margin-bottom:.5rem">How to submit your application to the agency?</strong>
-      Take a screenshot of this page and send it to the recruitment channel. Your score and all your answers are visible here.
+      <strong style="color:var(--text);display:block;margin-bottom:.5rem">Submit your application to the agency</strong>
+      Click the button below to automatically send your answers and score to the team.
+      <br><br>
+      <button onclick="submitToAgency()" id="submit-btn" style="background:var(--pink);color:#fff;border:none;padding:11px 28px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:8px;">
+        Submit my application ✉️
+      </button>
+      <div id="submit-msg" style="margin-top:12px;display:none"></div>
     </div>`;
   window.scrollTo(0,0);
 }
@@ -565,6 +609,56 @@ function retryQuiz(){
 }
 
 document.getElementById('f_heures').style.setProperty('--pct','33%');
+
+async function submitToAgency() {
+  const btn = document.getElementById('submit-btn');
+  const msg = document.getElementById('submit-msg');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const formData = {
+    name_username: document.getElementById('f_prenom').value || '—',
+    contacts: document.getElementById('f_contacts').value || '—',
+    experience: getVals('f_experience'),
+    experience_details: document.getElementById('f_detail_exp').value || '—',
+    motivation: document.getElementById('f_motivation').value || '—',
+    commitment: getVals('f_duree'),
+    situation: getVals('f_situation'),
+    hours_per_day: document.getElementById('f_heures').value + 'h',
+    time_slots: getVals('f_horaires'),
+    weekends: getVals('f_weekend'),
+    strengths: getVals('f_points_forts'),
+    weakness: document.getElementById('f_faiblesse').value || '—',
+    handling_aggression: document.getElementById('f_agressivite').value || '—',
+    female_persona: getVals('f_persona_fem'),
+    remarks: document.getElementById('f_remarques').value || '—',
+    quiz_score: qScore + '/12',
+    quiz_result: qScore >= 9 ? 'PASSED ✓' : qScore >= 7 ? 'TO REVIEW' : 'INSUFFICIENT',
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/xwvyzpeg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (res.ok) {
+      msg.style.display = 'block';
+      msg.style.color = 'var(--teal)';
+      msg.innerHTML = '✓ Application sent successfully! The team will contact you on Telegram or Discord within 48h.';
+      btn.textContent = 'Sent ✓';
+      btn.style.background = 'var(--teal)';
+    } else {
+      throw new Error('Error');
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.color = 'var(--red)';
+    msg.innerHTML = '✗ Something went wrong. Please take a screenshot and send it to the recruitment channel.';
+    btn.disabled = false;
+    btn.textContent = 'Try again';
+  }
+}
 </script>
 </body>
 </html>
