@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatter Application — OFM Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #D4537E;
+  --pink-l: #FBEAF0;
+  --pink-d: #993556;
+  --purple: #534AB7;
+  --purple-l: #EEEDFE;
+  --teal: #0F6E56;
+  --teal-l: #E1F5EE;
+  --amber: #854F0B;
+  --amber-l: #FAEEDA;
+  --blue: #185FA5;
+  --blue-l: #E6F1FB;
+  --red: #A32D2D;
+  --red-l: #FCEBEB;
+  --green: #27500A;
+  --green-l: #EAF3DE;
+  --gray: #444441;
+  --gray-l: #F1EFE8;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1A1A;
+  --muted: #6B6B68;
+  --hint: #9E9E9A;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+.shell{max-width:640px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.brand{text-align:center;margin-bottom:2.5rem;padding-top:1rem}
+.brand-name{font-family:'DM Serif Display',serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem}
+.brand-line{width:40px;height:1px;background:var(--pink);margin:0 auto}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.step-nav{display:flex;align-items:center;gap:0;margin-bottom:2rem}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--hint);transition:color .2s}
+.step.active{color:var(--pink)}
+.step.done{color:var(--teal)}
+.step-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;transition:all .2s;background:transparent}
+.step.active .step-dot{background:var(--pink);border-color:var(--pink);color:#fff}
+.step.done .step-dot{background:var(--teal);border-color:var(--teal);color:#fff}
+.step-line{flex:1;height:1px;background:var(--border);margin:0 10px}
+.step.done+.step-line{background:var(--teal)}
+.page-header{margin-bottom:2rem}
+.page-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);margin-bottom:.4rem;line-height:1.2}
+.page-sub{font-size:14px;color:var(--muted);line-height:1.6}
+.page-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:.875rem}
+.meta-tag{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.meta-tag svg{opacity:.5}
+.section-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin:2rem 0 1rem;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--pink-l),transparent)}
+.field{margin-bottom:1.25rem}
+.label{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.375rem;display:block}
+.sub-label{font-size:12px;color:var(--hint);margin-bottom:.5rem;display:block}
+textarea,input[type=text]{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;outline:none;resize:vertical;transition:border-color .2s,box-shadow .2s;line-height:1.6}
+textarea:focus,input[type=text]:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(212,83,126,.1)}
+textarea{min-height:80px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:.25rem}
+.pill{font-size:13px;padding:7px 16px;border-radius:99px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:400;font-family:'DM Sans',sans-serif}
+.pill:hover{border-color:var(--pink);color:var(--pink)}
+.pill.sel{background:var(--pink-l);border-color:var(--pink);color:var(--pink-d);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:.25rem}
+.card-opt{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all .18s;text-align:left;font-family:'DM Sans',sans-serif}
+.card-opt:hover{border-color:var(--pink);transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,83,126,.1)}
+.card-opt.sel{background:var(--pink-l);border-color:var(--pink)}
+.card-opt.sel .card-icon{color:var(--pink)}
+.card-icon{font-size:20px;margin-bottom:8px;color:var(--hint)}
+.card-title-t{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.card-sub-t{font-size:11px;color:var(--hint);line-height:1.4}
+.range-wrap{margin-top:.25rem}
+.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--hint);margin-bottom:6px}
+input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:99px;background:linear-gradient(to right,var(--pink) 0%,var(--pink) var(--pct,33%),#E0E0D8 var(--pct,33%),#E0E0D8 100%);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--pink);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.range-val{text-align:center;font-size:15px;font-weight:500;color:var(--pink);margin-top:6px}
+.divider{height:1px;background:var(--border);margin:2rem 0}
+.btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border)}
+.btn-back{font-size:13px;padding:9px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
+.btn-back:hover{border-color:var(--gray);color:var(--text)}
+.btn-next{font-size:14px;padding:11px 28px;border-radius:var(--radius-sm);border:none;background:var(--pink);color:#fff;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px;transition:all .15s;letter-spacing:.01em}
+.btn-next:hover{background:var(--pink-d);transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,83,126,.25)}
+.btn-next:active{transform:translateY(0)}
+.progress-bar-wrap{height:3px;background:var(--border);border-radius:99px;margin-bottom:1.75rem;overflow:hidden}
+.progress-bar{height:3px;background:var(--pink);border-radius:99px;transition:width .35s ease}
+.q-num{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-bottom:.5rem}
+.q-text{font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);margin-bottom:1.25rem;line-height:1.35}
+.q-context{font-size:13px;color:var(--muted);background:var(--gray-l);border-left:3px solid var(--pink);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:1.25rem;font-style:italic}
+.q-opts{display:flex;flex-direction:column;gap:9px;margin-bottom:1.25rem}
+.qopt{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:13px 16px;font-size:14px;color:var(--text);cursor:pointer;text-align:left;transition:all .18s;display:flex;align-items:center;gap:12px;font-family:'DM Sans',sans-serif;line-height:1.4}
+.qopt:hover{border-color:var(--pink);background:var(--pink-l)}
+.qopt.sel{border-color:var(--pink);background:var(--pink-l);color:var(--pink-d)}
+.qopt.correct{border-color:var(--teal);background:var(--teal-l);color:var(--teal)}
+.qopt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red)}
+.qopt.show-correct{border-color:var(--teal);background:var(--teal-l);color:var(--teal)}
+.opt-ltr{width:26px;height:26px;border-radius:6px;background:var(--gray-l);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;color:var(--muted);transition:all .15s}
+.qopt.sel:not(.correct):not(.wrong) .opt-ltr{background:var(--pink);color:#fff}
+.qopt.correct .opt-ltr,.qopt.show-correct .opt-ltr{background:var(--teal);color:#fff}
+.qopt.wrong .opt-ltr{background:var(--red);color:#fff}
+.feedback{border-radius:var(--radius-sm);padding:11px 15px;font-size:13px;line-height:1.6;margin-bottom:1.25rem;display:none}
+.feedback.show{display:block;animation:fadeIn .2s ease}
+.feedback.ok{background:var(--teal-l);border:1px solid rgba(15,110,86,.2);color:var(--teal)}
+.feedback.ko{background:var(--red-l);border:1px solid rgba(163,45,45,.2);color:var(--red)}
+.q-nav{display:flex;justify-content:space-between;align-items:center}
+.q-counter{font-size:13px;color:var(--hint)}
+.btn-qnext{font-size:13px;padding:9px 22px;border-radius:var(--radius-sm);border:none;background:var(--pink);color:#fff;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:all .15s}
+.btn-qnext:hover:not(:disabled){background:var(--pink-d)}
+.btn-qnext:disabled{opacity:.3;cursor:not-allowed}
+.results{text-align:center;padding:1rem 0}
+.score-ring{width:120px;height:120px;margin:0 auto 1.5rem;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-big{font-family:'DM Serif Display',serif;font-size:36px;line-height:1}
+.score-den{font-size:13px;color:var(--hint)}
+.res-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:.5rem}
+.res-sub{font-size:14px;color:var(--muted);line-height:1.7;max-width:380px;margin:0 auto 2rem}
+.bars{max-width:400px;margin:0 auto 2rem;text-align:left}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.bar-lbl{width:155px;color:var(--muted);flex-shrink:0;font-size:12px}
+.bar-wrap{flex:1;height:5px;background:var(--gray-l);border-radius:99px;overflow:hidden}
+.bar-fill{height:5px;border-radius:99px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.bar-pct{font-size:12px;color:var(--hint);min-width:30px;text-align:right}
+.action-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:1.5rem}
+.btn-action{font-size:13px;padding:10px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--pink);background:transparent;color:var(--pink);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:7px;transition:all .15s;font-weight:500}
+.btn-action:hover{background:var(--pink-l)}
+.result-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-top:2rem;text-align:left}
+.result-card h3{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--hint);margin-bottom:1rem}
+.result-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px}
+.result-row:last-child{border-bottom:none}
+.result-key{color:var(--muted);font-weight:400}
+.result-val{color:var(--text);font-weight:500;text-align:right;max-width:55%;word-break:break-word}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <div class="brand">
+    <div class="brand-name">OFM Agency</div>
+    <div class="brand-line"></div>
+  </div>
+
+  <div class="step-nav" id="step-nav">
+    <div class="step active" id="s1"><div class="step-dot">1</div><span>Application</span></div>
+    <div class="step-line" id="sl1"></div>
+    <div class="step" id="s2"><div class="step-dot">2</div><span>Kaly Quiz</span></div>
+    <div class="step-line" id="sl2"></div>
+    <div class="step" id="s3"><div class="step-dot">3</div><span>Results</span></div>
+  </div>
+
+  <!-- PAGE 1 — APPLICATION -->
+  <div class="page active" id="page1">
+    <div class="page-header">
+      <h1 class="page-title">Chatter application</h1>
+      <p class="page-sub">Fill this form carefully — it will be read by the team before we contact you.</p>
+      <div class="page-meta">
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5–7 minutes</span>
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg> 13 questions</span>
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Validation quiz after</span>
+      </div>
+    </div>
+
+    <div class="section-title">Basic information</div>
+
+    <div class="field">
+      <label class="label">What is your first name and username?</label>
+      <textarea id="f_prenom" placeholder="Ex: Lucas — username: luc_ofm" rows="2"></textarea>
+    </div>
+    <div class="field">
+      <label class="label">Your Telegram and Discord</label>
+      <textarea id="f_contacts" placeholder="Telegram: @username&#10;Discord: username#0000" rows="3"></textarea>
+    </div>
+
+    <div class="section-title">Chatting experience</div>
+
+    <div class="field">
+      <label class="label">Do you have any OFM chatting experience?</label>
+      <div class="cards" id="f_experience">
+        <button class="card-opt" data-val="Beginner — no experience" onclick="toggleCard(this,true)">
+          <div class="card-icon">👤</div>
+          <div class="card-title-t">Beginner</div>
+          <div class="card-sub-t">Never chatted on OF</div>
+        </button>
+        <button class="card-opt" data-val="Less than 3 months" onclick="toggleCard(this,true)">
+          <div class="card-icon">⚡</div>
+          <div class="card-title-t">Under 3 months</div>
+          <div class="card-sub-t">Some experience</div>
+        </button>
+        <button class="card-opt" data-val="3 to 12 months" onclick="toggleCard(this,true)">
+          <div class="card-icon">📈</div>
+          <div class="card-title-t">3 to 12 months</div>
+          <div class="card-sub-t">Solid experience</div>
+        </button>
+        <button class="card-opt" data-val="More than a year" onclick="toggleCard(this,true)">
+          <div class="card-icon">⭐</div>
+          <div class="card-title-t">1 year+</div>
+          <div class="card-sub-t">Senior profile</div>
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Briefly describe your experience</label>
+      <span class="sub-label">Account type (free/paid), how many accounts, what you actually did. If beginner, write "no experience".</span>
+      <textarea id="f_detail_exp" placeholder="Ex: 4 months on 2 free accounts, handling DMs and PPV follow-ups..." rows="3"></textarea>
+    </div>
+
+    <div class="section-title">Motivation & commitment</div>
+
+    <div class="field">
+      <label class="label">Why do you want to do OFM chatting?</label>
+      <span class="sub-label">Be honest — there is no wrong answer.</span>
+      <textarea id="f_motivation" placeholder="What draws you to this, why now..." rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="label">How long do you see yourself in this role?</label>
+      <div class="pills" id="f_duree">
+        <button class="pill" data-val="1 to 3 months" onclick="togglePill(this,true)">1–3 months</button>
+        <button class="pill" data-val="3 to 6 months" onclick="togglePill(this,true)">3–6 months</button>
+        <button class="pill" data-val="6 months to 1 year" onclick="togglePill(this,true)">6 mo–1 year</button>
+        <button class="pill" data-val="Long term — 1 year and more" onclick="togglePill(this,true)">Long term</button>
+      </div>
+    </div>
+
+    <div class="section-title">Situation & availability</div>
+
+    <div class="field">
+      <label class="label">What is your current situation?</label>
+      <div class="pills" id="f_situation">
+        <button class="pill" data-val="Student" onclick="togglePill(this,false)">Student</button>
+        <button class="pill" data-val="Employed on the side" onclick="togglePill(this,false)">Employed</button>
+        <button class="pill" data-val="Unemployed — fully available" onclick="togglePill(this,false)">Unemployed</button>
+        <button class="pill" data-val="Freelance" onclick="togglePill(this,false)">Freelance</button>
+        <button class="pill" data-val="Other" onclick="togglePill(this,false)">Other</button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">How many hours per day can you dedicate to chatting?</label>
+      <div class="range-wrap">
+        <div class="range-labels"><span>1h</span><span>4h</span><span>8h</span><span>12h+</span></div>
+        <input type="range" id="f_heures" min="1" max="12" step="1" value="4"
+          oninput="document.getElementById('hval').textContent=this.value+'h / day';this.style.setProperty('--pct',((this.value-1)/11*100)+'%')">
+        <div class="range-val" id="hval">4h / day</div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Which time slots are you available?</label>
+      <div class="pills" id="f_horaires">
+        <button class="pill" data-val="Morning (6am–12pm)" onclick="togglePill(this,false)">Morning</button>
+        <button class="pill" data-val="Afternoon (12pm–6pm)" onclick="togglePill(this,false)">Afternoon</button>
+        <button class="pill" data-val="Evening (6pm–11pm)" onclick="togglePill(this,false)">Evening</button>
+        <button class="pill" data-val="Night (11pm–6am)" onclick="togglePill(this,false)">Night</button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Available on weekends?</label>
+      <div class="pills" id="f_weekend">
+        <button class="pill" data-val="Yes — fully available" onclick="togglePill(this,true)">Yes, fully</button>
+        <button class="pill" data-val="Partially" onclick="togglePill(this,true)">Partially</button>
+        <button class="pill" data-val="No" onclick="togglePill(this,true)">No</button>
+      </div>
+    </div>
+
+    <div class="section-title">Chatting profile</div>
+
+    <div class="field">
+      <label class="label">What are you most comfortable with?</label>
+      <div class="cards" id="f_points_forts">
+        <button class="card-opt" data-val="Relationship & GFE" onclick="toggleCard(this,false)">
+          <div class="card-icon">🤍</div>
+          <div class="card-title-t">Relationship & GFE</div>
+          <div class="card-sub-t">Building connections, retention</div>
+        </button>
+        <button class="card-opt" data-val="Sales & PPV" onclick="toggleCard(this,false)">
+          <div class="card-icon">💸</div>
+          <div class="card-title-t">Sales & PPV</div>
+          <div class="card-sub-t">Converting, pitching</div>
+        </button>
+        <button class="card-opt" data-val="Persona embodiment" onclick="toggleCard(this,false)">
+          <div class="card-icon">🎭</div>
+          <div class="card-title-t">Persona</div>
+          <div class="card-sub-t">Playing a role, staying consistent</div>
+        </button>
+        <button class="card-opt" data-val="Organization & CRM" onclick="toggleCard(this,false)">
+          <div class="card-icon">📋</div>
+          <div class="card-title-t">Organization</div>
+          <div class="card-sub-t">Documenting, tracking</div>
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">What is your biggest weakness in chatting, honestly?</label>
+      <textarea id="f_faiblesse" placeholder="Ex: I get impatient with slow subscribers, I struggle staying in persona for long..." rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="label">A subscriber becomes aggressive and disrespectful. How do you react?</label>
+      <textarea id="f_agressivite" placeholder="Describe how you handle this situation concretely..." rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="label">Are you comfortable embodying a female persona?</label>
+      <div class="pills" id="f_persona_fem">
+        <button class="pill" data-val="Yes — no problem" onclick="togglePill(this,true)">Yes, no problem</button>
+        <button class="pill" data-val="Pretty much — with practice" onclick="togglePill(this,true)">Pretty much</button>
+        <button class="pill" data-val="Not yet — need guidance" onclick="togglePill(this,true)">Not yet</button>
+        <button class="pill" data-val="No" onclick="togglePill(this,true)">No</button>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Anything else you want us to know? <span style="font-weight:400;color:var(--hint)">(optional)</span></label>
+      <textarea id="f_remarques" placeholder="Anything that can help us get to know you better..." rows="2"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <span style="font-size:13px;color:var(--hint)">Step 1 / 2</span>
+      <button class="btn-next" onclick="goQuiz()">Continue to quiz <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 — QUIZ -->
+  <div class="page" id="page2">
+    <div class="page-header">
+      <h1 class="page-title">Kaly Persona Quiz</h1>
+      <p class="page-sub">Prove that you have read and understood the persona sheet before chatting.</p>
+      <div class="page-meta">
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg> 12 questions</span>
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 5–8 min</span>
+        <span class="meta-tag"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Passing score: 9/12</span>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap"><div class="progress-bar" id="qpbar" style="width:0%"></div></div>
+    <div id="quiz-inner"></div>
+
+    <div class="btn-row">
+      <button class="btn-back" onclick="goForm()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- PAGE 3 — RESULTS -->
+  <div class="page" id="page3">
+    <div id="results-inner"></div>
+  </div>
+
+</div>
+
+<script>
+const QA=['b','c','b','c','c','b','b','c','c','c','b','c'];
+const QQ=[
+  {cat:'Identity',txt:'What is the mantra every chatter must keep in mind before each session?',ctx:null,opts:['I am a professional chatter representing Kaly.','You are not a chatter. You are Kaly.','My role is to maximize sales for the agency.','I must stay professional and keep an emotional distance.']},
+  {cat:'Backstory',txt:'Why did Kaly launch her OnlyFans?',ctx:null,opts:['Only out of curiosity and personal challenge.','Only to make money.','Personal challenge + real financial need — both, without shame.','To fund her studies — money is taboo for her.']},
+  {cat:'Trust',txt:'A subscriber asks for Kaly\'s name on day 1. What does she do?',ctx:null,opts:['She refuses — personal information is off limits.','She gives her name spontaneously — it\'s Kaly, available from day 1.','She waits until day 7 before sharing her name.','She says "I can\'t tell you that" to keep the mystery.']},
+  {cat:'Trust system',txt:'When can Kaly slip in the secret that her parents know nothing?',ctx:null,opts:['From day 1 — a good way to create complicity.','Never — too sensitive.','Day 10–14 — when real trust is established, with humor.','Only if the subscriber asks directly before day 10.']},
+  {cat:'Tone & language',txt:'A subscriber compliments Kaly on her appearance. Which response fits best?',ctx:'Message received: "you\'re so gorgeous honestly"',opts:['"aww thanks bb 😘 glad you think so!"','"Thank you so much, that really means something."','"STOP 😭 okay why would you say that... I\'m literally turning red rn. I never know what to do with compliments I just short circuit lol. but thank you... genuinely ☺️"','"lol okay 🔥 wanna see more?"']},
+  {cat:'PPV pitch',txt:'It\'s day 1, the conversation is going well. How does Kaly introduce a PPV?',ctx:null,opts:['"check out my new content! $15 only 🔥"','"okay so... I filmed something and I\'ve been going back and forth on whether to even send it 😅 it\'s a little more than usual for me. it\'s $[price] if you\'re curious — no pressure fr"','"I have exclusive content available, want the link?"','She never sends a PPV on day 1 — wait at least until day 7.']},
+  {cat:'Emojis',txt:'Which emoji combination matches Kaly\'s style?',ctx:null,opts:['🔥 💋 💦 😈','😭 😳 🙈 😅 ☺️ 🎮 💀','❤️ 😍 🥰 💕 😘','💪 😎 👑 ✨ 🤑']},
+  {cat:'Gaming & CRM',txt:'A subscriber mentions he plays Valorant. What do you do immediately?',ctx:null,opts:['Ignore it — video games are not relevant to sales.','Change the subject to something more commercial.','Log "Valorant" in the CRM immediately, ask his rank, engage on that topic.','Wait until day 7 to bring up video games.']},
+  {cat:'Red flag',txt:'A subscriber says "you seem different today, that doesn\'t sound like you." What is the right reaction?',ctx:null,opts:['Keep going normally — he\'s probably just in a bad mood.','Apologize and try to recover the situation alone.','STOP — persona break detected. Escalate to the agency immediately.','Send a PPV to distract the subscriber and change the subject.']},
+  {cat:'Deflection',txt:'A subscriber asks for Kaly\'s exact city. How does she respond?',ctx:null,opts:['"I can\'t answer that question."','She gives a fake city to satisfy the subscriber.','lmao I\'m not giving you my full address on day 1 😭 give me some credit — deflects with humor.','She answers honestly — transparency is the priority.']},
+  {cat:'Evolution',txt:'When can Kaly start initiating conversations and proposing customs?',ctx:null,opts:['From day 1 — the earlier you sell, the better.','Day 15–25 — when trust is established and she dares more.','Only after 3 months of relationship.','Never — it\'s always the subscriber who should initiate.']},
+  {cat:'Final test',txt:'Before sending a message, what is the only test that really matters?',ctx:null,opts:['"Will this message generate a sale?"','"Is this a good chatter message?"','"Would Kaly actually say this?"','"Does this message follow agency rules?"']},
+];
+const QFB=[
+  {ok:'Exactly. You are not an operator — you ARE Kaly. Every answer comes from her.',ko:'Wrong. The mantra is: "You are not a chatter. You are Kaly." No distance — you fully embody the persona.'},
+  {ok:'Correct. Two honest reasons, both owned. Money is pragmatic, not taboo.',ko:'Incomplete. Dual motivation: personal challenge AND real financial need. Money is never taboo for Kaly.'},
+  {ok:'Yes. Kaly is not suspicious, she is shy. Her name is given spontaneously from day 1.',ko:'Wrong. Name = day 1, spontaneously. Being shy does not mean hiding.'},
+  {ok:'Perfect. The parents\' secret is an intimate confidence for day 10–14, slipped in with humor.',ko:'Incorrect. This secret unlocks between day 10 and 14 — not from day 1, not never.'},
+  {ok:'Perfect. Sincere surprise, Gen Z awkwardness, authentic thanks. That is Kaly.',ko:'Wrong register. Kaly reacts with genuine awkwardness — "short circuit", real thanks. Not smooth.'},
+  {ok:'That\'s it. Hesitation, minimization, zero pressure. Kaly shares — she does not sell.',ko:'Wrong. Dry PPV pitch = persona break. Kaly always hesitates, always lets the subscriber feel free.'},
+  {ok:'Exactly. Her emojis reflect her shyness and Gen Z humor — never too confident.',ko:'Not her emojis. Kaly\'s palette: 😭 😳 🙈 😅 ☺️ 🎮 💀 — never 🔥 💋 💦 😈.'},
+  {ok:'Jackpot understood. Immediate CRM + gaming engagement = loyal subscriber almost guaranteed.',ko:'Wrong. Gamer subscriber = jackpot. Game logged in CRM immediately, direct engagement.'},
+  {ok:'Correct. Critical red flag — stop and escalate, never try to recover alone.',ko:'Wrong. "You seem different" = persona break. STOP + immediate agency escalation.'},
+  {ok:'Perfect. Kaly deflects with humor, never bluntly, never gives her real city.',ko:'Incorrect. No blunt refusal, no real city. Always a humorous deflection.'},
+  {ok:'Yes. Day 15–25 is the natural window where she dares — visible and credible.',ko:'Wrong. Kaly\'s initiative emerges at day 15–25 — not before, not after 3 months.'},
+  {ok:'That IS the test. Just: is it HER? Not the sales, not the rules.',ko:'Wrong. The only test: "Would Kaly actually say this?" Everything else follows from that.'},
+];
+const CATS=[[0,1],[2,3],[4,5,6],[7],[8,9,10,11]];
+
+let qCur=0,qScore=0,qDone=new Array(12).fill(false);
+let catS=[[0,2],[0,2],[0,3],[0,1],[0,4]];
+
+function togglePill(btn,single){
+  const g=btn.closest('.pills');
+  if(single) g.querySelectorAll('.pill').forEach(p=>p.classList.remove('sel'));
+  btn.classList.toggle('sel');
+}
+function toggleCard(btn,single){
+  const g=btn.closest('.cards');
+  if(single) g.querySelectorAll('.card-opt').forEach(c=>c.classList.remove('sel'));
+  btn.classList.toggle('sel');
+}
+function getVals(id){
+  const el=document.getElementById(id);
+  if(!el) return '—';
+  const s=el.querySelectorAll('.sel,.pill.sel,.card-opt.sel');
+  const vals=Array.from(s).map(x=>x.dataset.val||x.textContent.trim()).filter(Boolean);
+  return vals.length?vals.join(', '):'—';
+}
+
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    const s=document.getElementById('s'+i);
+    s.classList.remove('active','done');
+    if(i<n){s.classList.add('done');s.querySelector('.step-dot').innerHTML='<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>';}
+    else if(i===n){s.classList.add('active');s.querySelector('.step-dot').textContent=i;}
+    else{s.querySelector('.step-dot').textContent=i;}
+    if(i<3){const l=document.getElementById('sl'+i);l.style.background=i<n?'var(--teal)':'var(--border)';}
+  });
+}
+
+function buildQuiz(){
+  const wrap=document.getElementById('quiz-inner');
+  wrap.innerHTML='';
+  QQ.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='q-block'+(i===0?' active':'');
+    div.dataset.qi=i;
+    div.style.display=i===0?'block':'none';
+    const letters=['a','b','c','d'];
+    const optsHtml=q.opts.map((o,oi)=>`<button class="qopt" data-v="${letters[oi]}" onclick="qpick(this,${i})"><span class="opt-ltr">${letters[oi].toUpperCase()}</span>${o}</button>`).join('');
+    div.innerHTML=`<div class="q-num">Question ${i+1} / 12 · ${q.cat}</div>`+
+      `<p class="q-text">${q.txt}</p>`+
+      (q.ctx?`<div class="q-context">${q.ctx}</div>`:'')+
+      `<div class="q-opts">${optsHtml}</div>`+
+      `<div class="feedback" id="qfb${i}"></div>`+
+      `<div class="q-nav"><span class="q-counter">${i+1} / 12</span>`+
+      `<button class="btn-qnext" onclick="${i<11?'qnext('+i+')':'showResults()'}" disabled id="qnb${i}">`+
+      `${i<11?'Next →':'See results 🏆'}</button></div>`;
+    wrap.appendChild(div);
+  });
+}
+
+function qpick(btn,i){
+  if(qDone[i]) return;
+  qDone[i]=true;
+  const v=btn.dataset.v;
+  const correct=QA[i];
+  btn.closest('.q-opts').querySelectorAll('.qopt').forEach(o=>{
+    o.style.pointerEvents='none';
+    if(o.dataset.v===correct) o.classList.add('show-correct');
+  });
+  const fb=document.getElementById('qfb'+i);
+  if(v===correct){
+    btn.classList.add('correct');
+    qScore++;
+    CATS.forEach((c,ci)=>{if(c.includes(i)) catS[ci][0]++;});
+    fb.className='feedback show ok';
+    fb.textContent='✓ '+QFB[i].ok;
+  } else {
+    btn.classList.add('wrong');
+    fb.className='feedback show ko';
+    fb.textContent='✗ '+QFB[i].ko;
+  }
+  document.getElementById('qnb'+i).disabled=false;
+  document.getElementById('qpbar').style.width=Math.round((i+1)/12*100)+'%';
+}
+
+function qnext(i){
+  document.querySelectorAll('.q-block').forEach((b,bi)=>{b.style.display=bi===i+1?'block':'none';});
+  qCur=i+1;
+  window.scrollTo(0,0);
+}
+
+function goForm(){
+  document.getElementById('page1').classList.add('active');
+  document.getElementById('page2').classList.remove('active');
+  setStep(1);
+  window.scrollTo(0,0);
+}
+
+function goQuiz(){
+  qCur=0;qScore=0;qDone=new Array(12).fill(false);catS=[[0,2],[0,2],[0,3],[0,1],[0,4]];
+  buildQuiz();
+  document.getElementById('page1').classList.remove('active');
+  document.getElementById('page2').classList.add('active');
+  document.getElementById('qpbar').style.width='0%';
+  setStep(2);
+  window.scrollTo(0,0);
+}
+
+function showResults(){
+  document.getElementById('page2').classList.remove('active');
+  document.getElementById('page3').classList.add('active');
+  setStep(3);
+  const lvl=qScore>=9?'pass':qScore>=7?'mid':'fail';
+  const color=lvl==='pass'?'var(--teal)':lvl==='mid'?'var(--amber)':'var(--red)';
+  const title=lvl==='pass'?'Quiz passed — welcome!':lvl==='mid'?'Almost — a few points to review':'Not ready yet — re-read the Kaly sheet';
+  const sub=lvl==='pass'?'You know Kaly. You can move on to onboarding.':lvl==='mid'?'Re-read the sections in red and try again. Passing score: 9/12.':'Re-read the full persona sheet before trying again.';
+  const btext=lvl==='pass'?'Passed ✓':lvl==='mid'?'To review':'Insufficient';
+  const pct=Math.round(qScore/12*100);
+  const r=48;const circ=2*Math.PI*r;const offset=circ*(1-pct/100);
+  const catNames=['Identity & backstory','Trust system','Tone & scripts','Gaming & CRM','Operational rules'];
+  const catColors=['#D4537E','#534AB7','#0F6E56','#854F0B','#185FA5'];
+  const barsHtml=catS.map((c,i)=>{
+    const p=c[1]>0?Math.round(c[0]/c[1]*100):0;
+    return `<div class="bar-row"><span class="bar-lbl">${catNames[i]}</span><div class="bar-wrap"><div class="bar-fill" style="width:${p}%;background:${catColors[i]}"></div></div><span class="bar-pct">${p}%</span></div>`;
+  }).join('');
+  const formData=[
+    ['Name / username',document.getElementById('f_prenom').value||'—'],
+    ['Contacts',document.getElementById('f_contacts').value||'—'],
+    ['Experience',getVals('f_experience')],
+    ['Experience details',document.getElementById('f_detail_exp').value||'—'],
+    ['Motivation',document.getElementById('f_motivation').value||'—'],
+    ['Commitment',getVals('f_duree')],
+    ['Situation',getVals('f_situation')],
+    ['Hours / day',document.getElementById('f_heures').value+'h'],
+    ['Time slots',getVals('f_horaires')],
+    ['Weekends',getVals('f_weekend')],
+    ['Strengths',getVals('f_points_forts')],
+    ['Weakness',document.getElementById('f_faiblesse').value||'—'],
+    ['Handling aggression',document.getElementById('f_agressivite').value||'—'],
+    ['Female persona',getVals('f_persona_fem')],
+    ['Quiz score',qScore+'/12 — '+btext],
+  ];
+  const rowsHtml=formData.map(([k,v])=>`<div class="result-row"><span class="result-key">${k}</span><span class="result-val">${v}</span></div>`).join('');
+  document.getElementById('results-inner').innerHTML=`
+    <div class="results">
+      <div class="score-ring">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="${r}" fill="none" stroke="#F0F0EC" stroke-width="8"/>
+          <circle cx="60" cy="60" r="${r}" fill="none" stroke="${color}" stroke-width="8"
+            stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round" style="transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)"/>
+        </svg>
+        <div class="score-ring-text">
+          <span class="score-big" style="color:${color}">${qScore}</span>
+          <span class="score-den">/ 12</span>
+        </div>
+      </div>
+      <h2 class="res-title">${title}</h2>
+      <p class="res-sub">${sub}</p>
+      <div class="bars">${barsHtml}</div>
+      <div class="action-row">
+        ${lvl!=='pass'?`<button class="btn-action" onclick="retryQuiz()">↺ Retry quiz</button>`:''}
+      </div>
+    </div>
+    <div class="result-card">
+      <h3>Application summary</h3>
+      ${rowsHtml}
+    </div>
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--gray-l);border-radius:var(--radius);font-size:13px;color:var(--muted);line-height:1.7">
+      <strong style="color:var(--text);display:block;margin-bottom:.5rem">How to submit your application to the agency?</strong>
+      Take a screenshot of this page and send it to the recruitment channel. Your score and all your answers are visible here.
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryQuiz(){
+  qCur=0;qScore=0;qDone=new Array(12).fill(false);catS=[[0,2],[0,2],[0,3],[0,1],[0,4]];
+  buildQuiz();
+  document.getElementById('page3').classList.remove('active');
+  document.getElementById('page2').classList.add('active');
+  document.getElementById('qpbar').style.width='0%';
+  setStep(2);
+  window.scrollTo(0,0);
+}
+
+document.getElementById('f_heures').style.setProperty('--pct','33%');
+</script>
+</body>
+</html>
